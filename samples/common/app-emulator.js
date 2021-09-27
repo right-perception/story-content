@@ -1,4 +1,5 @@
 window._storyTemplate = {
+
     "scheme": {
         "app": {
             "appMutable": false,
@@ -8,17 +9,24 @@ window._storyTemplate = {
             "appMutable": false,
             "contentMutable": false
         },
-        "presentation": {
-            "appMutable": false,
-            "contentMutable": false
+        "content": {
+            "appMutable": true,
+            "contentMutable": true
         },
         "questProgress": {
             "appMutable": true,
-            "contentMutable": false
-        },
-        "debugAppState": {
-            "appMutable": true,
-            "contentMutable": true
+            "contentMutable": false,
+            "actions": [
+                {
+                    "name": "transfer"
+                },
+                {
+                    "name": "transferPonts"
+                },
+                {
+                    "name": "grantCampaign"
+                }
+            ]
         }
     },
     "app": {
@@ -29,65 +37,8 @@ window._storyTemplate = {
     "user": {
         "phone": "70000000001"
     },
-    "presentation": {
-        "id": "209"
-    },
-    "questProgress": {
-        "stageName": "Изучение",
-        "state": "Success"
-    },
-    "debugAppState": {
-        "presentation": {
-            "notes": {
-                "text": "Тут большое или маленькое предложение, которое можно задать в конфигураторе"
-            },
-            "items": {
-                "field_1": {
-                    "value": "field_1 val",
-                    "order": 1
-                },
-                "field_3": {
-                    "value": "field_3 val 3",
-                    "order": 3
-                },
-                "field_2": {
-                    "value": "field_2 val 2",
-                    "order": 2
-                }
-            },
-            "rating": {
-                "visible": true,
-                "parameters": {
-                    "color": "#000000",
-                    "fontSize": 12
-                },
-                "value": 3
-
-            }
-        },
-        "f1": 0,
-        "f2": "v2",
-        "f3": true,
-        "f6": "f6 value",
-        "f8": "f8 value",
-        "f10": {
-            "f101": "value of f101"
-        },
-        "f14": "f14 to removeStoryProp",
-        "f51": {
-            "f51_test": "initial value"
-        }
-    }
-};
-
-window._storyTemplate = {
-    "scheme": {
-        "presentation": {
-            "appMutable": true,
-            "contentMutable": true
-        }
-    },
-    "presentation": {
+    "content": {
+        "id": "209",
         "accentColor": {
             "accentColorVisible": true,
             "parameters": {
@@ -132,7 +83,11 @@ window._storyTemplate = {
             },
             "ratingVisible": true
         }
-    }
+    },
+    "questProgress": {
+        "stageName": "Изучение",
+        "state": "Success"
+    },
 };
 
 window._set_story = function () {

@@ -4,7 +4,11 @@
         $('#logs').append(`<div>${value}</div>`);
     }
     logToDiv(window.story);
-    _set_story();
+
+    // context debug
+    if (typeof window._set_story === 'function') {
+        _set_story();
+    }
 
     // Заголовок (header)
     const renderHeader = () => {

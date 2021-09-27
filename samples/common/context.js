@@ -70,6 +70,13 @@
 
     }
 
+    const runAction = function (action, ...args) {
+        // android
+        if (typeof window.nativeStory?.runAction === 'function') {
+
+        }
+    }
+
     const pushKeyPathPart = function (keyPathParts, part) {
         let newKeyPathParts = keyPathParts.slice();
         newKeyPathParts.push(part);
@@ -116,14 +123,14 @@
         notifyApp('delete', objectName, parts.join('.'));
     }
 
-    const proxifyState = function (objectName, keyPathParts, state, mutable) {
+    const proxifyState = function (objectName, keyPathParts, state, scheme) {
 
         let getter = function (target, property) {
             return target[property];
         };
 
         let setter = function (target, property, value) {
-            if (!mutable) {
+            if (!scheme.contentMutable) {
                 throw new Error(`story: property ${property} is immutable`);
             }
 
@@ -134,7 +141,7 @@
         };
 
         let definer = function (_, property, attributes) {
-            if (!mutable) {
+            if (!scheme.contentMutable) {
                 throw new Error(`story: property ${property} is immutable`);
             }
 
@@ -149,7 +156,7 @@
         };
 
         let deleter = function (_, property) {
-            if (!mutable) {
+            if (!scheme.contentMutable) {
                 throw new Error(`story: property ${property} is immutable`);
             }
 
@@ -160,7 +167,7 @@
         let newState = {};
         for (stateProp in state) {
             newState[stateProp] = state[stateProp] !== null && typeof state[stateProp] === 'object'
-                ? proxifyState(objectName, pushKeyPathPart(keyPathParts, stateProp), state[stateProp], mutable)
+                ? proxifyState(objectName, pushKeyPathPart(keyPathParts, stateProp), state[stateProp], scheme)
                 : state[stateProp];
         }
 
@@ -181,7 +188,16 @@
                 continue;
             }
 
-            newState[newStoryProp] = proxifyState(newStoryProp, [], newStory[newStoryProp], newStory.scheme[newStoryProp].contentMutable);
+            let scheme = newStory.scheme[newStoryProp];
+
+            if (scheme.actions) {
+                for (let action of scheme.actions) {
+                    newStory[newStoryProp][action.name] = function () {
+                        runAction(action.name, arguments);
+                    }
+                }
+            }
+            newState[newStoryProp] = proxifyState(newStoryProp, [], newStory[newStoryProp], scheme);
         }
 
         let onStoryChange = window.story?.onStoryChange;
