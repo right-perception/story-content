@@ -1,5 +1,4 @@
 window._storyTemplate = {
-
     "scheme": {
         "app": {
             "appMutable": false,
@@ -11,7 +10,12 @@ window._storyTemplate = {
         },
         "content": {
             "appMutable": true,
-            "contentMutable": true
+            "contentMutable": true,
+            "actions": [
+                {
+                    "name": "getClient"
+                }
+            ]
         },
         "questProgress": {
             "appMutable": true,
@@ -21,7 +25,7 @@ window._storyTemplate = {
                     "name": "transfer"
                 },
                 {
-                    "name": "transferPonts"
+                    "name": "transferPoints"
                 },
                 {
                     "name": "grantCampaign"
@@ -39,54 +43,26 @@ window._storyTemplate = {
     },
     "content": {
         "id": "209",
-        "accentColor": {
-            "accentColorVisible": true,
-            "parameters": {
-                "color": "#555555",
-                "transparent": "#FF"
-            }
-        },
-        "form": {
-            "formVisible": true,
-            "items": {
-                "input_1": {
-                    "backgroundColor": "#ffffff",
-                    "fontColor": "#000000",
-                    "fontSize": 15,
-                    "inputValue": "some value",
-                    "name": "input name 1",
-                    "order": 1
-                },
-                "input_2": {
-                    "backgroundColor": "#123334",
-                    "fontColor": "#344445",
-                    "fontSize": 12,
-                    "inputValue": "",
-                    "name": "inputTitle 2",
-                    "order": 2
-                }
-            }
-        },
-        "notes": {
-            "notesVisible": true,
-            "parameters": {
-                "color": "#992222",
-                "fontSize": 12,
-                "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-        },
-        "rating": {
-            "parameters": {
-                "color": "#6E4BD9",
-                "progress": 2,
-                "quantity": 4
-            },
-            "ratingVisible": true
-        }
     },
     "questProgress": {
-        "stageName": "Изучение",
-        "state": "Success"
+        "id": "a3683112.24061960-4e41-47d0-b466-246dda10e467",
+        "quest": {
+            "id": "2a6b25f7.c73e0ca8-ed80-4e32-b0b6-1a0999052f63",
+            "stages": {
+                "846da8c1.af4bcc6e-27a1-455e-a5c2-90376e1db861": {
+                    "id": "846da8c1.af4bcc6e-27a1-455e-a5c2-90376e1db861",
+                    "name": "Промо"
+                },
+                "846da8c1.b881da79-3f15-41be-93a5-0926e6f76489": {
+                    "id": "846da8c1.b881da79-3f15-41be-93a5-0926e6f76489",
+                    "name": "Промо 1"
+                },
+                "846da8c1.c3be83d0-bc71-44ab-b090-2ee97f375bbc": {
+                    "id": "846da8c1.c3be83d0-bc71-44ab-b090-2ee97f375bbc",
+                    "name": "УУУУУУУУУУУУУУ"
+                }
+            }
+        }
     },
 };
 

@@ -1,4 +1,4 @@
-// rev:45
+// rev:46
 
 ; (function () {
     if (window._story === undefined) {
@@ -67,13 +67,22 @@
                 webkit.messageHandlers.deleteStoryProp.postMessage(JSON.stringify(model));
             }
         }
-
     }
 
-    const runAction = function (action, ...args) {
+    const runAction = function (objectName, action, model) {
         // android
         if (typeof window.nativeStory?.runAction === 'function') {
+            window.nativeStory.runAction(objectName, action, JSON.stringify(model));
+        }
 
+        // ios
+        if (window.webkit !== undefined && typeof webkit.messageHandlers?.runAction?.postMessage === 'function') {
+            let iosModel = {
+                ...model,
+                objectName,
+                action
+            }
+            webkit.messageHandlers.runAction.postMessage(JSON.stringify(iosModel));
         }
     }
 
@@ -183,7 +192,7 @@
 
     const proxifyStory = function (newStory) {
         let newState = {};
-        for (newStoryProp in newStory) {
+        for (let newStoryProp in newStory) {
             if (!newStoryProp in newStory.scheme || newStoryProp === 'scheme') {
                 continue;
             }
@@ -192,8 +201,10 @@
 
             if (scheme.actions) {
                 for (let action of scheme.actions) {
-                    newStory[newStoryProp][action.name] = function () {
-                        runAction(action.name, arguments);
+                    newStory[newStoryProp][action.name] = function (model, callback) {
+                        runAction(newStoryProp, action.name, model);
+                        window._story[newStoryProp][`${action.name}Callback`] = callback;
+                        console.log(action.name, JSON.stringify(model, null, 2));
                     }
                 }
             }

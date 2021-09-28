@@ -1,6 +1,6 @@
 ﻿<!-- context debug start -->
-<script src="../../common/app-emulator.js"></script>
-<script src="../../common/context.js"></script>
+<script src="../../../src/app-emulator.js"></script>
+<script src="../../../src/context.js"></script>
 <!-- context debug finish -->
 
 <!DOCTYPE html>
@@ -42,16 +42,12 @@
         <div class="row mt-3">
             <div class="col col-3">
                 <div class="d-flex align-items-center" style="height:100%;">
-                    <span>Points:</span>
+                    <span>Stage:</span>
                 </div>
             </div>
             <div class="col col-9">
-                <select class="form-control form-control-sm" id="points">
-                    <option>0</option>
-                    <option>1</option>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>50</option>
+                <select class="form-control form-control-sm" id="stage">
+                    <option value="">-</option>
                 </select>
             </div>
         </div>
@@ -98,11 +94,41 @@
             </div>
         </div>
         <div class="row mt-3">
+            <div class="col col-3">
+                <div class="d-flex align-items-center" style="height:100%;">
+                    <span>Points:</span>
+                </div>
+            </div>
+            <div class="col col-9">
+                <select class="form-control form-control-sm" id="points">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>5</option>
+                    <option>10</option>
+                    <option>50</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-3">
             <div class="col col-6">
                 <button id="addFlowEvent" type="button" class="btn btn-primary btn-block" disabled>Send</button>
             </div>
             <div class="col col-6">
-                <button id="resetForm" type="button" class="btn secondary btn-block">Reset</button>
+                <button id="resetForm" type="button" class="btn btn-secondary btn-block">Reset</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col col-3">
+                <button id="transfer" type="button" class="btn btn-secondary btn-block" disabled>Transfer</button>
+            </div>
+            <div class="col col-3">
+                <button id="transferPoints" type="button" class="btn btn-secondary btn-block" disabled>Transfer points</button>
+            </div>
+            <div class="col col-3">
+                <button id="grantCampaign" type="button" class="btn btn-secondary btn-block" disabled>Grant campaign</button>
+            </div>
+            <div class="col col-3">
+                <button id="getClient" type="button" class="btn btn-secondary btn-block">Get client</button>
             </div>
         </div>
         <div class="row">
@@ -111,102 +137,7 @@
     </div>
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/storyclm-2.2.0.js"></script>
-    <script>
-
-        var titles = {
-            inprogress: "Заголовок события inprogress",
-            success: "Заголовок события success",
-            fail: "Заголовок события fail"
-        }
-
-        var messages = {
-            inprogress: "Сообщение события inprogress",
-            success: "Сообщение события success",
-            fail: "Сообщение события fail"
-        }
-
-        var values = {
-            inprogress: "Значение события inprogress",
-            success: "Значениие события success",
-            fail: "Значениие события fail"
-        }
-
-        $("input[name='quest-status']").change(function (e) {
-            disableSendButton(!e.target.value);
-
-            $(`input[name='quest-status']`).prop('checked', false);
-            $("[id^='quest-status-label-'").removeClass('active')
-
-            $(`input[name='quest-status'][value='${e.target.value}']`).prop('checked', true);
-            $(`#quest-status-label-${e.target.value}`).addClass('active')
-
-            $("#title").val(titles[e.target.value]);
-            $("#message").val(messages[e.target.value]);
-            $("#value").val(values[e.target.value]);
-        });
-
-        $(function () {
-            $("#addFlowEvent").click(function () {
-                disableForm();
-
-                let data = {
-                    status: $("input[name='quest-status']:checked").val(),
-                    points: $("#points").val(),
-                    title: $("#title").val(),
-                    message: $("#message").val(),
-                    value: $("#value").val(),
-                    goal: $("#goal").prop("checked")
-                };
-
-                StoryCLM.SendCommand("addFlowEvent", data, function (msg) {
-                    $("#response").html("<pre>" + JSON.stringify(msg, null, 4) + "</pre>");
-                    resetForm();
-                    enableForm();
-                });
-            });
-
-            $("#resetForm").click(function () {
-                resetForm();
-            });
-
-        });
-
-        var disableSendButton = function (disabled) {
-            $("#addFlowEvent").prop('disabled', disabled);
-
-        }
-
-        var disableForm = function () {
-            $("input[name='quest-status']").prop('disabled', true);
-            $("[id^='quest-status-label-'").addClass('disabled')
-            $("#points").prop('disabled', true);
-            $("#title").prop('disabled', true);
-            $("#message").prop('disabled', true);
-            $("#value").prop('disabled', true);
-            $("#goal").prop('disabled', true);
-        }
-        var enableForm = function () {
-            $("input[name='quest-status']").prop('disabled', false);
-            $("[id^='quest-status-label-'").removeClass('disabled')
-            $("#points").prop('disabled', false);
-            $("#title").prop('disabled', false);
-            $("#message").prop('disabled', false);
-            $("#value").prop('disabled', false);
-            $("#goal").prop('disabled', false);
-        }
-
-        var resetForm = function () {
-            $(`input[name='quest-status']:checked`).prop('checked', false);
-            $("[id^='quest-status-label-'").removeClass('active')
-            $("#title").val("");
-            $("#message").val("");
-            $("#value").val("");
-            $("#points").val(0);
-            $("#goal").prop("checked", false);
-            enableForm();
-            disableSendButton(true);
-        }
-    </script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
