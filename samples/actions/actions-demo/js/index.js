@@ -35,6 +35,16 @@ $("input[name='quest-status']").change(function (e) {
     $("#value").val(values[e.target.value]);
 });
 
+$("select[name='points']").change(function (e) {
+    if (e.target.value > 0) {
+        $("#budgetEventForm").removeClass('hidden');
+        $("#transferPoints").prop('disabled', false);
+    } else {
+        $("#budgetEventForm").addClass('hidden');
+        $("#transferPoints").prop('disabled', true);
+    }
+});
+
 $(function () {
 
     $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
@@ -51,14 +61,16 @@ $(function () {
         });
     }
 
-    window.story.questProgress.getCampaigns(function (campaigns) {
-        $.each(campaigns, function (_, campaign) {
-            $('#campaign').append($('<option>', {
-                value: campaign.id,
-                text: campaign.name
-            }));
+    if (typeof window.story.questProgress?.getCampaigns === 'function') {
+        window.story.questProgress.getCampaigns(function (campaigns) {
+            $.each(campaigns, function (_, campaign) {
+                $('#campaign').append($('<option>', {
+                    value: campaign.id,
+                    text: campaign.name
+                }));
+            });
         });
-    });
+    }
 
     $("#resetForm").click(function () {
         resetForm();
@@ -104,6 +116,10 @@ $(function () {
             resetForm();
         });
     });
+
+    story.onStoryChange = function () {
+        $("#response").html("<pre>" + JSON.stringify(window.story, null, 4) + "</pre>");
+    }
 });
 
 var disableButtons = function (disabled) {
@@ -119,7 +135,13 @@ const getFormData = () => {
         message: $("#message").val(),
         value: $("#value").val(),
         goal: $("#goal").prop("checked"),
-        stageId: $("#stage").val()
+        stageId: $("#stage").val(),
+        budgetEvent: {
+            title: $("#budgetEventTitle").val(),
+            message: $("#budgetEventMessage").val(),
+            operationType: $("#budgetEventOperationType").val(),
+            direction: $("#budgetEventDirection").val()
+        }
     };
 }
 
@@ -127,31 +149,12 @@ const getBudgetEvent = () => {
     let formData = getFormData();
 
     return {
-        operationType: "Accepted",
-        direction: "Forward",
-        title: formData.title,
-        message: formData.message,
+        title: formData.budgetEvent.title,
+        message: formData.budgetEvent.message,
+        operationType: formData.budgetEvent.operationType,
+        direction: formData.budgetEvent.operationType,
         value: formData.points
     };
-}
-
-var disableForm = function () {
-    $("input[name='quest-status']").prop('disabled', true);
-    $("[id^='quest-status-label-'").addClass('disabled')
-    $("#points").prop('disabled', true);
-    $("#title").prop('disabled', true);
-    $("#message").prop('disabled', true);
-    $("#value").prop('disabled', true);
-    $("#goal").prop('disabled', true);
-}
-var enableForm = function () {
-    $("input[name='quest-status']").prop('disabled', false);
-    $("[id^='quest-status-label-'").removeClass('disabled')
-    $("#points").prop('disabled', false);
-    $("#title").prop('disabled', false);
-    $("#message").prop('disabled', false);
-    $("#value").prop('disabled', false);
-    $("#goal").prop('disabled', false);
 }
 
 var resetForm = function () {
@@ -162,6 +165,13 @@ var resetForm = function () {
     $("#value").val("");
     $("#points").val(0);
     $("#goal").prop("checked", false);
-    enableForm();
-    disableButtons(true);
+
+    $("#budgetEventForm").addClass('hidden');
+    $("#budgetEventTitle").val("");
+    $("#budgetEventMessage").val("");
+    $("#budgetEventOperationType").val("Accepted");
+    $("#budgetEventDirection").val("Forward");
+
+    $("#transfer").prop('disabled', true);
+    $("#transferPoints").prop('disabled', true);
 }

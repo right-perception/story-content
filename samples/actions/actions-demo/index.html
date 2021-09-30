@@ -1,6 +1,6 @@
 ﻿<!-- context debug start -->
-<script src="../../../src/app-emulator.js"></script>
-<script src="../../../src/context.js"></script>
+<!-- <script src="../../../src/app-emulator.js"></script>
+<script src="../../../src/context.js"></script> -->
 <!-- context debug finish -->
 
 <!DOCTYPE html>
@@ -12,13 +12,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Index</title>
+    <title>Context demo</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 </head>
 
 <body>
     <h1 id="title"></h1>
-    <div class="container-fluid">
+    <div class="container-fluid" style="overflow-y: scroll; max-height: 100vh;">
         <div style="height: 100px;"></div>
         <div class="row mt-3">
             <div class="col col-3">
@@ -110,6 +111,62 @@
                 </select>
             </div>
         </div>
+        <div id="budgetEventForm" class="hidden">
+            <div class="row mt-3">
+                Budget event:
+            </div>
+            <div class="row mt-3">
+                <div class="col col-3">
+                    <div class="d-flex align-items-center" style="height:100%;">
+                        <span>Title:</span>
+                    </div>
+                </div>
+                <div class="col col-9">
+                    <input id="budgetEventTitle" class="form-control form-control-sm" type="text" name="budgetEventTitle">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col col-3">
+                    <div class="d-flex align-items-center" style="height:100%;">
+                        <span>Message:</span>
+                    </div>
+                </div>
+                <div class="col col-9">
+                    <input id="budgetEventMessage" class="form-control form-control-sm" type="text" name="budgetEventMessage">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col col-3">
+                    <div class="d-flex align-items-center" style="height:100%;">
+                        <span>Operation type:</span>
+                    </div>
+                </div>
+                <div class="col col-9">
+                    <select class="form-control form-control-sm" id="budgetEventOperationType" name="budgetEventOperationType">
+                        <option value="Accepted">Accepted</option>
+                        <option value="Reserved">Reserved</option>
+                        <option value="Canceled">Canceled</option>
+                        <option value="PartialAccepted">PartialAccepted</option>
+                        <option value="Reject">Reject</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Review">Review</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col col-3">
+                    <div class="d-flex align-items-center" style="height:100%;">
+                        <span>Direction:</span>
+                    </div>
+                </div>
+                <div class="col col-9">
+                    <select class="form-control form-control-sm" id="budgetEventDirection" name="budgetEventDirection">
+                        <option value="Forward">Forward</option>
+                        <option value="Backward">Backward</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="row mt-3">
             <div class="col col-5">
                 <button id="transfer" type="button" class="btn btn-secondary btn-block" disabled>Transfer</button>
@@ -127,12 +184,12 @@
                     <span>Campaign:</span>
                 </div>
             </div>
-            <div class="col col-7">
+            <div class="col col-4">
                 <select class="form-control form-control-sm" id="campaign" name="campaign">
                     <option value="">-</option>
                 </select>
             </div>
-            <div class="col col-2">
+            <div class="col col-5">
                 <button id="grantCampaign" type="button" class="btn btn-secondary btn-block">Grant campaign</button>
             </div>
         </div>
@@ -142,10 +199,10 @@
                     <span>ClientId:</span>
                 </div>
             </div>
-            <div class="col col-7">
+            <div class="col col-4">
                 <input id="client" class="form-control form-control-sm" type="text">
             </div>
-            <div class="col col-2">
+            <div class="col col-5">
                 <button id="getClient" type="button" class="btn btn-secondary btn-block">Get client</button>
             </div>
         </div>

@@ -1,0 +1,10 @@
+#response {
+    word-break: break-word;
+}
+
+.hidden {
+    position: absolute;
+    top: -9999px;
+    height: 0;
+    width: 0;
+}

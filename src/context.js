@@ -202,8 +202,8 @@
             if (scheme.actions) {
                 for (let action of scheme.actions) {
                     newStory[newStoryProp][action.name] = function (...args) {
-                        let model = args.length > 1 ? args[0] : null;
-                        let callback = args.length > 1 ? args[1] : args[0];
+                        let model = action.hasModel ? args[0] : null;
+                        let callback = action.hasModel ? args[1] : args[0];
                         window._story[newStoryProp][`${action.name}Callback`] = callback;
                         runAction(newStoryProp, action.name, model);
                         console.log(action.name, JSON.stringify(model, null, 2));
