@@ -9,11 +9,12 @@ window._storyTemplate = {
             "contentMutable": false
         },
         "content": {
-            "appMutable": true,
-            "contentMutable": true,
+            "appMutable": false,
+            "contentMutable": false,
             "actions": [
                 {
-                    "name": "getClient"
+                    "name": "getClient",
+                    "hasModel": true
                 }
             ]
         },
@@ -22,15 +23,26 @@ window._storyTemplate = {
             "contentMutable": false,
             "actions": [
                 {
-                    "name": "transfer"
+                    "name": "transfer",
+                    "hasModel": true
                 },
                 {
-                    "name": "transferPoints"
+                    "name": "transferPoints",
+                    "hasModel": true
                 },
                 {
-                    "name": "grantCampaign"
+                    "name": "grantCampaign",
+                    "hasModel": true
+                },
+                {
+                    "name": "getCampaigns",
+                    "hasModel": false
                 }
             ]
+        },
+        "questProgressAttributes": {
+            "appMutable": true,
+            "contentMutable": true
         }
     },
     "app": {
@@ -64,6 +76,12 @@ window._storyTemplate = {
             }
         }
     },
+    "questProgressAttributes": {
+        "stages": {
+            "backgroundColor": "#FFF",
+            "title": "title 1"
+        }
+    }
 };
 
 window._set_story = function () {
@@ -104,5 +122,23 @@ window.nativeStory = {
         delete field[lastPart];
         window._story = newState;
         _onStoryChange();
+    },
+    runAction: function (objectName, action, json) {
+        if (objectName === 'content' && action === 'getClient') {
+            let model = JSON.parse(json);
+            window._story.content.getClientCallback({ id: model, name: 'client name1' });
+        }
+        if (objectName === 'questProgress' && action === 'getCampaigns') {
+            window._story.questProgress.getCampaignsCallback([
+                {
+                    id: '1',
+                    name: 'campaign1'
+                },
+                {
+                    id: '2',
+                    name: 'campaign2'
+                }
+            ]);
+        }
     }
 }

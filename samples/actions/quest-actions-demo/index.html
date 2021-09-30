@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <h1 id="title"></h1>
     <div class="container-fluid">
         <div style="height: 100px;"></div>
         <div class="row mt-3">
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <div class="col col-9">
-                <select class="form-control form-control-sm" id="stage">
+                <select class="form-control form-control-sm" id="stage" name="stage">
                     <option value="">-</option>
                 </select>
             </div>
@@ -100,7 +101,7 @@
                 </div>
             </div>
             <div class="col col-9">
-                <select class="form-control form-control-sm" id="points">
+                <select class="form-control form-control-sm" id="points" name="points">
                     <option>0</option>
                     <option>1</option>
                     <option>5</option>
@@ -110,24 +111,41 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col col-6">
-                <button id="addFlowEvent" type="button" class="btn btn-primary btn-block" disabled>Send</button>
+            <div class="col col-5">
+                <button id="transfer" type="button" class="btn btn-secondary btn-block" disabled>Transfer</button>
             </div>
-            <div class="col col-6">
-                <button id="resetForm" type="button" class="btn btn-secondary btn-block">Reset</button>
+            <div class="col col-5">
+                <button id="transferPoints" type="button" class="btn btn-secondary btn-block" disabled>Transfer points</button>
+            </div>
+            <div class="col col-2">
+                <button id="resetForm" type="button" class="btn btn-light btn-block">Reset</button>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col col-3">
-                <button id="transfer" type="button" class="btn btn-secondary btn-block" disabled>Transfer</button>
+                <div class="d-flex align-items-center" style="height:100%;">
+                    <span>Campaign:</span>
+                </div>
             </div>
-            <div class="col col-3">
-                <button id="transferPoints" type="button" class="btn btn-secondary btn-block" disabled>Transfer points</button>
+            <div class="col col-7">
+                <select class="form-control form-control-sm" id="campaign" name="campaign">
+                    <option value="">-</option>
+                </select>
             </div>
-            <div class="col col-3">
-                <button id="grantCampaign" type="button" class="btn btn-secondary btn-block" disabled>Grant campaign</button>
+            <div class="col col-2">
+                <button id="grantCampaign" type="button" class="btn btn-secondary btn-block">Grant campaign</button>
             </div>
+        </div>
+        <div class="row mt-3">
             <div class="col col-3">
+                <div class="d-flex align-items-center" style="height:100%;">
+                    <span>ClientId:</span>
+                </div>
+            </div>
+            <div class="col col-7">
+                <input id="client" class="form-control form-control-sm" type="text">
+            </div>
+            <div class="col col-2">
                 <button id="getClient" type="button" class="btn btn-secondary btn-block">Get client</button>
             </div>
         </div>
@@ -136,7 +154,6 @@
         </div>
     </div>
     <script src="js/jquery-3.6.0.js"></script>
-    <script src="js/storyclm-2.2.0.js"></script>
     <script src="js/index.js"></script>
 </body>
 

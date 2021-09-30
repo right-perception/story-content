@@ -37,29 +37,26 @@ $("input[name='quest-status']").change(function (e) {
 
 $(function () {
 
-    $.each(story.questProgress.quest.stages, function (_, stage) {
-        $('#stage').append($('<option>', {
-            value: stage.id,
-            text: stage.name
-        }));
-    });
+    $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
 
-    $("#addFlowEvent").click(function () {
-        disableForm();
+    $('body').css('background-color', window.story.questProgressAttributes?.content?.backgroundColor);
+    $('#title').text(window.story.questProgressAttributes?.content?.title);
 
-        let data = {
-            status: $("input[name='quest-status']:checked").val(),
-            points: $("#points").val(),
-            title: $("#title").val(),
-            message: $("#message").val(),
-            value: $("#value").val(),
-            goal: $("#goal").prop("checked")
-        };
+    if (story.questProgress?.quest?.stages) {
+        $.each(story.questProgress.quest.stages, function (_, stage) {
+            $('#stage').append($('<option>', {
+                value: stage.id,
+                text: stage.name
+            }));
+        });
+    }
 
-        StoryCLM.SendCommand("addFlowEvent", data, function (msg) {
-            $("#response").html("<pre>" + JSON.stringify(msg, null, 4) + "</pre>");
-            resetForm();
-            enableForm();
+    window.story.questProgress.getCampaigns(function (campaigns) {
+        $.each(campaigns, function (_, campaign) {
+            $('#campaign').append($('<option>', {
+                value: campaign.id,
+                text: campaign.name
+            }));
         });
     });
 
@@ -67,32 +64,29 @@ $(function () {
         resetForm();
     });
 
-
-    let budgetEvent = {
-        operationType: "Accepted",
-        direction: "Forward",
-        title: "transfer points title 2",
-        message: "transfer points message 2",
-        value: 10
-    };
-
     $("#transfer").click(function () {
         let formData = getFormData();
 
-        story.questProgress.transfer({
+        let questEvent = {
             title: formData.title,
             message: formData.message,
             status: formData.status,
             value: formData.value,
             goal: formData.goal,
             stageId: formData.stageId
-        });
+        };
+
+        if (formData.points > 0) {
+            questEvent.budgetEvent = getBudgetEvent();
+        }
+
+        story.questProgress.transfer(questEvent);
 
         resetForm();
     });
 
     $("#transferPoints").click(function () {
-        story.questProgress.transferPoints(budgetEvent);
+        story.questProgress.transferPoints(getBudgetEvent());
         resetForm();
     });
 
@@ -105,18 +99,16 @@ $(function () {
     });
 
     $("#getClient").click(function () {
-        story.content.getClient(22, (result) => {
-            console.log(result, 'campaign granted');
+        story.content.getClient($("#client").val(), (result) => {
+            $("#response").html("<pre>" + JSON.stringify(result, null, 4) + "</pre>");
+            resetForm();
         });
     });
 });
 
 var disableButtons = function (disabled) {
-    $("#addFlowEvent").prop('disabled', disabled);
     $("#transfer").prop('disabled', disabled);
     $("#transferPoints").prop('disabled', disabled);
-    $("#grantCampaign").prop('disabled', disabled);
-
 }
 
 const getFormData = () => {
@@ -128,6 +120,18 @@ const getFormData = () => {
         value: $("#value").val(),
         goal: $("#goal").prop("checked"),
         stageId: $("#stage").val()
+    };
+}
+
+const getBudgetEvent = () => {
+    let formData = getFormData();
+
+    return {
+        operationType: "Accepted",
+        direction: "Forward",
+        title: formData.title,
+        message: formData.message,
+        value: formData.points
     };
 }
 
