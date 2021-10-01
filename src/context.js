@@ -1,9 +1,9 @@
-// rev:49
+// rev:50
 
 ; (function () {
-    // if (window._story === undefined) {
-    //     window._story = {};
-    // }
+    if (window._story === undefined) {
+        window._story = {};
+    }
 
     const getType = function (value) {
         let type;
