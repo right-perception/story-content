@@ -4,7 +4,7 @@ window._storyTemplate = {
             "appMutable": false,
             "contentMutable": false
         },
-        "user": {
+        "licence": {
             "appMutable": false,
             "contentMutable": false
         },
@@ -50,7 +50,7 @@ window._storyTemplate = {
         "name": "context debug app",
         "version": "0.1.2"
     },
-    "user": {
+    "licence": {
         "phone": "70000000001"
     },
     "content": {

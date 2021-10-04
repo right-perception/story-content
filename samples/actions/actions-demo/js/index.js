@@ -50,7 +50,7 @@ $(function () {
     $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
 
     $('body').css('background-color', window.story.questProgressAttributes?.content?.backgroundColor);
-    $('#title').text(window.story.questProgressAttributes?.content?.title);
+    $('#head-title').text(window.story.questProgressAttributes?.content?.title);
 
     if (story.questProgress?.quest?.stages) {
         $.each(story.questProgress.quest.stages, function (_, stage) {
@@ -98,7 +98,9 @@ $(function () {
     });
 
     $("#transferPoints").click(function () {
-        story.questProgress.transferPoints(getBudgetEvent());
+        let bu = getBudgetEvent();
+        alert(JSON.stringify(bu, null, 4));
+        story.questProgress.transferPoints(bu);
         resetForm();
     });
 
@@ -152,7 +154,7 @@ const getBudgetEvent = () => {
         title: formData.budgetEvent.title,
         message: formData.budgetEvent.message,
         operationType: formData.budgetEvent.operationType,
-        direction: formData.budgetEvent.operationType,
+        direction: formData.budgetEvent.direction,
         value: formData.points
     };
 }

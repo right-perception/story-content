@@ -1,6 +1,6 @@
 ﻿<!-- context debug start -->
-<!-- <script src="../../../src/app-emulator.js"></script>
-<script src="../../../src/context.js"></script> -->
+<script src="../../../src/app-emulator.js"></script>
+<script src="../../../src/context.js"></script>
 <!-- context debug finish -->
 
 <!DOCTYPE html>
@@ -12,13 +12,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Context demo</title>
+    <title>Actions demo</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1 id="title"></h1>
+    <h1 id="head-title"></h1>
     <div class="container-fluid" style="overflow-y: scroll; max-height: 100vh;">
         <div style="height: 100px;"></div>
         <div class="row mt-3">
@@ -168,14 +168,14 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col col-5">
-                <button id="transfer" type="button" class="btn btn-secondary btn-block" disabled>Transfer</button>
+            <div class="col col-4">
+                <button id="transfer" type="button" class="btn btn-secondary btn-sm btn-block" disabled>Transfer</button>
             </div>
-            <div class="col col-5">
-                <button id="transferPoints" type="button" class="btn btn-secondary btn-block" disabled>Transfer points</button>
+            <div class="col col-4">
+                <button id="transferPoints" type="button" class="btn btn-secondary btn-sm btn-block" disabled>Transfer points</button>
             </div>
-            <div class="col col-2">
-                <button id="resetForm" type="button" class="btn btn-light btn-block">Reset</button>
+            <div class="col col-4">
+                <button id="resetForm" type="button" class="btn btn-light btn-sm btn-block">Reset</button>
             </div>
         </div>
         <div class="row mt-3">
@@ -190,7 +190,7 @@
                 </select>
             </div>
             <div class="col col-5">
-                <button id="grantCampaign" type="button" class="btn btn-secondary btn-block">Grant campaign</button>
+                <button id="grantCampaign" type="button" class="btn btn-secondary btn-sm btn-block">Grant campaign</button>
             </div>
         </div>
         <div class="row mt-3">
@@ -203,7 +203,7 @@
                 <input id="client" class="form-control form-control-sm" type="text">
             </div>
             <div class="col col-5">
-                <button id="getClient" type="button" class="btn btn-secondary btn-block">Get client</button>
+                <button id="getClient" type="button" class="btn btn-secondary btn-sm btn-block">Get client</button>
             </div>
         </div>
         <div class="row">

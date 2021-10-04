@@ -1,6 +1,19 @@
 
 # Quest Actions
 
+## Состояние прохождения квеста
+
+Контекст, когда контент запущен для квеста, содержит объект QuestProgress. Это основной объект, описывающий пользователя, кампанию, квест, а также состояние прохождения квеста.
+
+Список объектов QuestProgress в админ-панели:
+
+![Список объектов QuestProgress в админ-панели](assets/QuestProgressList.png)
+
+Состояние прохождения формируется списком событий квеста и статус и состояние после последнеднего произошедшего события.
+Для появления состояния прохождения, пользователь должен выполнить хотя бы одно действие с квестом (например, принять его).
+
+![Список событий квеста](assets/QuestAcceptEvent.png)
+
 ## Команды работы с квестом
 
 ### Событие квеста
@@ -19,19 +32,34 @@
 * **value** - `string`;
 * **goal** - `boolean`;
 * **stageId** - `string`;
-* **PointsTransfer** - `object`. Модель из запроса "Перевод баллов".
+* **PointsTransfer** - `object`. Одновременно с событием квеста, можно создать событие перевода баллов. Модель из команды "Перевод баллов".
 
 **Запрос:**
 
 ```js
 story.questProgress.transfer({
-    title: "transfer title 1",
-    message: "transfer message 1",
-    status: "Action",
-    value: "transfer value 1",
-    goal: true
+    title: 'Вы перешли на этап Stage-1',
+    message: 'Вам начислены баллы',
+    status: 'Action',
+    value: 'some value',
+    goal: true,
+    PointsTransfer:{
+        operationType: 'Approved',
+        direction: 'Forward',
+        title: 'Начисление баллов',
+        message: 'Успешное прохождение этапа квеста',
+        value: 10,
+    }
 });
 ```
+
+Список событий можно увидеть, развернув QuestProgress в админ-панели:
+
+![Список событий квеста](assets/QuestEventList.png)
+
+В приложении сменился этап квеста:
+
+![Этап квеста в приложении](assets/MobileAppStageChange.jpg)
 
 ### Перевод баллов
 
