@@ -1,4 +1,4 @@
-// rev:51
+// rev:52
 
 ; (function () {
     if (window._story === undefined) {
@@ -234,7 +234,7 @@
         Object.defineProperty(window, '_onStoryChange', {
             value: function () {
                 try {
-                    proxifyStory(_story);
+                    proxifyStory({ ..._story });
                     if (typeof window.story.onStoryChange === 'function') {
                         story.onStoryChange();
                     }
