@@ -13,7 +13,7 @@
 
 В атрибутах доступны следующие типы:
 
-* **number** - +-Infinite и NaN не поддерживаются;
+* **number** - `+-Infinite` и `NaN` не поддерживаются;
 * **string**;
 * **boolean**;
 * **null** - отсутствие значения;
@@ -25,7 +25,9 @@
 
 При запуске контента для квеста объект window.story содержит, помимо прочего, следующие объекты атрибутов:
 
-* **licenceAttributes**. Атрибуты пользователя;
+* **licenseAttributes**. Атрибуты пользователя;
+* **campaignAttributes**. Атрибуты кампании;
+* **questAttributes**. Атрибуты квеста.
 * **questProgressAttributes**. Атрибуты состояния прохождения квеста.
 
 ### Варианты работы
@@ -34,7 +36,7 @@
 
 При прямом изменении полей контекста, изменения применяются сразу, например код
 
-`window.story.licenceAttributes.loginCount = 5`
+`window.story.licenseAttributes.loginCount = 5`
 
 сразу после вызова устанавливает поле контекста `loginCount` в 5. Реальные изменения и применение значения на сервере будут выполнены позже.
 
@@ -45,7 +47,7 @@
 
 ```js
 window.story.setStory({
-    licenceAttributes: {
+    licenseAttributes: {
         loginAttempts: {
             success: 3
         }
@@ -59,7 +61,7 @@ window.story.setStory({
 
 вызовет изменения полей
 
-`story.licenceAttributes.loginAttempts.success = 3`
+`story.licenseAttributes.loginAttempts.success = 3`
 
  и
 
