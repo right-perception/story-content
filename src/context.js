@@ -1,8 +1,12 @@
-// rev:50
+// rev:51
 
 ; (function () {
     if (window._story === undefined) {
         window._story = {};
+    }
+
+    if (window._storyCallbacks === undefined) {
+        window._storyCallbacks = {};
     }
 
     const getType = function (value) {
@@ -201,10 +205,13 @@
 
             if (scheme.actions) {
                 for (let action of scheme.actions) {
+                    if (window._storyCallbacks[newStoryProp] === undefined) {
+                        window._storyCallbacks[newStoryProp] = {};
+                    }
                     newStory[newStoryProp][action.name] = function (...args) {
                         let model = action.hasModel ? args[0] : null;
                         let callback = action.hasModel ? args[1] : args[0];
-                        window._story[newStoryProp][`${action.name}Callback`] = callback;
+                        window._storyCallbacks[newStoryProp][`${action.name}Callback`] = callback;
                         runAction(newStoryProp, action.name, model);
                         console.log(action.name, JSON.stringify(model, null, 2));
                     }
@@ -221,7 +228,7 @@
         window.story.removeStoryProp = removeStoryProp;
     }
 
-    proxifyStory(_story);
+    proxifyStory({ ..._story });
 
     if (window._onStoryChange === undefined) {
         Object.defineProperty(window, '_onStoryChange', {
