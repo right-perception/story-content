@@ -1,4 +1,4 @@
-// rev:52
+// rev:53
 
 ; (function () {
     if (window._story === undefined) {
@@ -210,7 +210,7 @@
                     }
                     newStory[newStoryProp][action.name] = function (...args) {
                         let model = action.hasModel ? args[0] : null;
-                        let callback = action.hasModel ? args[1] : args[0];
+                        let callback = (action.hasModel ? args[1] : args[0]) || function () { };
                         window._storyCallbacks[newStoryProp][`${action.name}Callback`] = callback;
                         runAction(newStoryProp, action.name, model);
                         console.log(action.name, JSON.stringify(model, null, 2));
