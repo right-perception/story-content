@@ -1,0 +1,63 @@
+<!-- context debug start -->
+<!-- <script src="../../../src/app-emulator.js"></script>
+<script src="../../../src/context.js"></script> -->
+<!-- context debug finish -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Attributes demo</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <div style="min-height: 70px;"></div>
+    <div class="container-fluid" style="overflow-y: scroll; max-height: 100vh;">
+        <div class="row mt-3">
+            <div class="col">
+                <button id="btn-1" class="btn btn-secondary btn-sm btn-block">licenseAttributes.testProp1 = 1;</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button id="btn-2" class="btn btn-secondary btn-sm btn-block" disabled>licenseAttributes.testProp2 = 'test string';</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button id="btn-3" class="btn btn-secondary btn-sm btn-block" disabled>licenseAttributes.testProp3 = null;</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button id="btn-4" class="btn btn-secondary btn-sm btn-block" disabled>licenseAttributes.testProp4 = undefined;</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button id="btn-5" class="btn btn-secondary btn-sm btn-block" disabled>licenseAttributes.testProp5 = {testProp51 = 1};</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button id="btn-6" class="btn btn-secondary btn-sm btn-block">story.setStory({ licenseAttributes: { testProp6 = 6 } });</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div>
+        <pre id="context" style="font-size: 12px;"></pre>
+    </div>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

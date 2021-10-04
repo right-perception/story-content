@@ -4,19 +4,19 @@ if (typeof window._set_story === 'function') {
 }
 
 var titles = {
-    inprogress: "Заголовок события inprogress",
+    action: "Заголовок события action",
     success: "Заголовок события success",
     fail: "Заголовок события fail"
 }
 
 var messages = {
-    inprogress: "Сообщение события inprogress",
+    action: "Сообщение события action",
     success: "Сообщение события success",
     fail: "Сообщение события fail"
 }
 
 var values = {
-    inprogress: "Значение события inprogress",
+    action: "Значение события action",
     success: "Значениие события success",
     fail: "Значениие события fail"
 }
@@ -33,6 +33,7 @@ $("input[name='quest-status']").change(function (e) {
     $("#title").val(titles[e.target.value]);
     $("#message").val(messages[e.target.value]);
     $("#value").val(values[e.target.value]);
+    $("#budgetEventTitle").val('Заголовок бюджетного события');
 });
 
 $("select[name='points']").change(function (e) {
@@ -46,11 +47,6 @@ $("select[name='points']").change(function (e) {
 });
 
 $(function () {
-
-    $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
-
-    $('body').css('background-color', window.story.questProgressAttributes?.content?.backgroundColor);
-    $('#head-title').text(window.story.questProgressAttributes?.content?.title);
 
     if (story.questProgress?.quest?.stages) {
         $.each(story.questProgress.quest.stages, function (_, stage) {
@@ -89,24 +85,25 @@ $(function () {
         };
 
         if (formData.points > 0) {
-            questEvent.budgetEvent = getBudgetEvent();
+            questEvent.pointsTransfer = getBudgetEvent();
         }
 
-        story.questProgress.transfer(questEvent);
+        story.questProgress.transfer(questEvent, () => {
+            resetForm();
+        });
 
-        resetForm();
     });
 
     $("#transferPoints").click(function () {
         let bu = getBudgetEvent();
-        alert(JSON.stringify(bu, null, 4));
-        story.questProgress.transferPoints(bu);
-        resetForm();
+        story.questProgress.transferPoints(bu, () => {
+            resetForm();
+        });
     });
 
     $("#grantCampaign").click(function () {
         story.questProgress.grantCampaign({
-            campaignId: "dbd24451.8020f915-cd52-412b-99f6-8fbd3c9936ec"
+            campaignId: $("#campaign").val()
         });
 
         resetForm();
@@ -120,7 +117,13 @@ $(function () {
     });
 
     story.onStoryChange = function () {
-        $("#response").html("<pre>" + JSON.stringify(window.story, null, 4) + "</pre>");
+        $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
+        let stageId = window.story.questProgress?.stage?.id;
+        let stageSettings = window.story.questProgressAttributes?.stagesSettings[stageId];
+        if (stageSettings) {
+            $('body').css('background-color', stageSettings.backgroundColor);
+            $('#head-title').text(stageSettings.title);
+        }
     }
 });
 
@@ -137,7 +140,7 @@ const getFormData = () => {
         message: $("#message").val(),
         value: $("#value").val(),
         goal: $("#goal").prop("checked"),
-        stageId: $("#stage").val(),
+        stageId: $("#stage").val() || null,
         budgetEvent: {
             title: $("#budgetEventTitle").val(),
             message: $("#budgetEventMessage").val(),

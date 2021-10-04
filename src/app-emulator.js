@@ -4,7 +4,7 @@ window._storyTemplate = {
             "appMutable": false,
             "contentMutable": false
         },
-        "licence": {
+        "license": {
             "appMutable": false,
             "contentMutable": false
         },
@@ -17,6 +17,10 @@ window._storyTemplate = {
                     "hasModel": true
                 }
             ]
+        },
+        "quest": {
+            "appMutable": true,
+            "contentMutable": false,
         },
         "questProgress": {
             "appMutable": true,
@@ -40,6 +44,10 @@ window._storyTemplate = {
                 }
             ]
         },
+        "licenseAttributes": {
+            "appMutable": true,
+            "contentMutable": true
+        },
         "questProgressAttributes": {
             "appMutable": true,
             "contentMutable": true
@@ -50,14 +58,33 @@ window._storyTemplate = {
         "name": "context debug app",
         "version": "0.1.2"
     },
-    "licence": {
+    "license": {
         "phone": "70000000001"
     },
     "content": {
         "id": "209",
     },
+    "quest": {
+        "stages": {
+            "846da8c1.c477add3-788f-45bb-a435-d09843366743": {
+                "id": "846da8c1.c477add3-788f-45bb-a435-d09843366743",
+                "name": "Stage-0"
+            },
+            "846da8c1.9a4bda8a-3d4a-4f97-856a-42c211c620fe": {
+                "id": "846da8c1.9a4bda8a-3d4a-4f97-856a-42c211c620fe",
+                "name": "Stage-1"
+            },
+            "846da8c1.fa8e69f8-1243-42ca-bb9f-5d636cacd7cf": {
+                "id": "846da8c1.fa8e69f8-1243-42ca-bb9f-5d636cacd7cf",
+                "name": "Stage-2"
+            }
+        }
+    },
     "questProgress": {
         "id": "a3683112.24061960-4e41-47d0-b466-246dda10e467",
+        "stage": {
+            "id": "846da8c1.c477add3-788f-45bb-a435-d09843366743"
+        },
         "quest": {
             "id": "2a6b25f7.c73e0ca8-ed80-4e32-b0b6-1a0999052f63",
             "stages": {
@@ -76,10 +103,23 @@ window._storyTemplate = {
             }
         }
     },
+    "licenseAttributes": {
+
+    },
     "questProgressAttributes": {
-        "stages": {
-            "backgroundColor": "#FFF",
-            "title": "title 1"
+        "stagesSettings": {
+            "846da8c1.c477add3-788f-45bb-a435-d09843366743": {
+                "backgroundColor": "#ffd1dc",
+                "title": "Title for stage 0"
+            },
+            "846da8c1.9a4bda8a-3d4a-4f97-856a-42c211c620fe": {
+                "backgroundColor": "#6495ed",
+                "title": "Title for stage 1"
+            },
+            "846da8c1.fa8e69f8-1243-42ca-bb9f-5d636cacd7cf": {
+                "backgroundColor": "#6ee3b7",
+                "title": "Title for stage 2"
+            }
         }
     }
 };
@@ -126,10 +166,12 @@ window.nativeStory = {
     runAction: function (objectName, action, json) {
         if (objectName === 'content' && action === 'getClient') {
             let model = JSON.parse(json);
-            window._story.content.getClientCallback({ id: model, name: 'client name1' });
+            window._storyCallbacks.content.getClientCallback({ id: model, name: 'client name1' });
+        } if (objectName === 'questProgress' && action === 'transferPoints') {
+            window._storyCallbacks.questProgress.transferPointsCallback({});
         }
         if (objectName === 'questProgress' && action === 'getCampaigns') {
-            window._story.questProgress.getCampaignsCallback([
+            window._storyCallbacks.questProgress.getCampaignsCallback([
                 {
                     id: '1',
                     name: 'campaign1'

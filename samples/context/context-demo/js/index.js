@@ -17,8 +17,8 @@ $("#tabs a").on("click", function (event) {
         case 'content-tab':
             obj = window.story.content;
             break;
-        case 'licence-tab':
-            obj = window.story.licence;
+        case 'license-tab':
+            obj = window.story.license;
             break;
         case 'quest-progress-tab':
             obj = window.story.questProgress;

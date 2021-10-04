@@ -213,7 +213,6 @@
                         let callback = (action.hasModel ? args[1] : args[0]) || function () { };
                         window._storyCallbacks[newStoryProp][`${action.name}Callback`] = callback;
                         runAction(newStoryProp, action.name, model);
-                        console.log(action.name, JSON.stringify(model, null, 2));
                     }
                 }
             }
