@@ -17,6 +17,7 @@
 
 <body>
     <div style="min-height: 70px;"></div>
+
     <ul class="nav nav-tabs" id="tabs">
         <li class="nav-item">
             <a class="nav-link px-2 active" id="app-tab" href="#">App</a>
@@ -28,6 +29,9 @@
             <a class="nav-link px-2" id="license-tab" href="#">License</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link px-2" id="quest-tab" href="#">Quest</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link px-2" id="quest-progress-tab" href="#">QuestProgress</a>
         </li>
         <li class="nav-item">
@@ -35,8 +39,10 @@
         </li>
     </ul>
 
-    <div>
-        <pre id="content" style="font-size: 12px;"></pre>
+    <div class="container-fluid" style="overflow-y: scroll; max-height: 100vh;">
+        <div>
+            <pre id="content" style="font-size: 12px;"></pre>
+        </div>
     </div>
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/index.js"></script>

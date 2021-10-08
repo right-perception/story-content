@@ -44,7 +44,53 @@ window._storyTemplate = {
                 }
             ]
         },
+        "questProgressFiles": {
+            "appMutable": true,
+            "contentMutable": false,
+            "actions": [
+                {
+                    "name": "delete",
+                    "hasModel": true
+                },
+                {
+                    "name": "openVideoDialog",
+                    "hasModel": true
+                },
+                {
+                    "name": "openAudioDialog",
+                    "hasModel": true
+                },
+                {
+                    "name": "openPhotoDialog",
+                    "hasModel": true
+                },
+                {
+                    "name": "openFileDialog",
+                    "hasModel": true
+                },
+                {
+                    "name": "startRecordScreen",
+                    "hasModel": false
+                },
+                {
+                    "name": "stopRecordScreen",
+                    "hasModel": false
+                },
+                {
+                    "name": "openBarDialog",
+                    "hasModel": true
+                },
+                {
+                    "name": "openQRDialog",
+                    "hasModel": true
+                }
+            ]
+        },
         "licenseAttributes": {
+            "appMutable": true,
+            "contentMutable": true
+        },
+        "questAttributes": {
             "appMutable": true,
             "contentMutable": true
         },
@@ -84,21 +130,24 @@ window._storyTemplate = {
         "id": "a3683112.24061960-4e41-47d0-b466-246dda10e467",
         "stage": {
             "id": "846da8c1.c477add3-788f-45bb-a435-d09843366743"
-        },
-        "quest": {
-            "id": "2a6b25f7.c73e0ca8-ed80-4e32-b0b6-1a0999052f63",
-            "stages": {
-                "846da8c1.af4bcc6e-27a1-455e-a5c2-90376e1db861": {
-                    "id": "846da8c1.af4bcc6e-27a1-455e-a5c2-90376e1db861",
-                    "name": "Промо"
-                },
-                "846da8c1.b881da79-3f15-41be-93a5-0926e6f76489": {
-                    "id": "846da8c1.b881da79-3f15-41be-93a5-0926e6f76489",
-                    "name": "Промо 1"
-                },
-                "846da8c1.c3be83d0-bc71-44ab-b090-2ee97f375bbc": {
-                    "id": "846da8c1.c3be83d0-bc71-44ab-b090-2ee97f375bbc",
-                    "name": "УУУУУУУУУУУУУУ"
+        }
+    },
+    "questProgressFiles": {
+        "items": {
+            "0": {
+                "name": "actions-demo.zip",
+                "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/actions-demo.zip?sv=2020-08-04&st=2021-10-06T07%3A11%3A06Z&se=2022-10-07T07%3A11%3A06Z&sr=b&sp=r&sig=r8QxkHHmH0et3sfkXfGpoHoM%2FkowNJBxEyNXUmPYjxE%3D",
+                "size": 55442,
+                "metadata": {
+                    "hash": "1234"
+                }
+            },
+            "1": {
+                "name": "some-image.png",
+                "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/actions-demo.zip?sv=2020-08-04&st=2021-10-06T07%3A11%3A06Z&se=2022-10-07T07%3A11%3A06Z&sr=b&sp=r&sig=r8QxkHHmH0et3sfkXfGpoHoM%2FkowNJBxEyNXUmPYjxE%3D",
+                "size": 334455,
+                "metadata": {
+                    "hash": "gfdhgdhgd"
                 }
             }
         }
@@ -106,21 +155,23 @@ window._storyTemplate = {
     "licenseAttributes": {
 
     },
-    "questProgressAttributes": {
+    "questAttributes": {
         "stagesSettings": {
-            "846da8c1.c477add3-788f-45bb-a435-d09843366743": {
+            "c477add3-788f-45bb-a435-d09843366743": {
                 "backgroundColor": "#ffd1dc",
                 "title": "Title for stage 0"
             },
-            "846da8c1.9a4bda8a-3d4a-4f97-856a-42c211c620fe": {
+            "9a4bda8a-3d4a-4f97-856a-42c211c620fe": {
                 "backgroundColor": "#6495ed",
                 "title": "Title for stage 1"
             },
-            "846da8c1.fa8e69f8-1243-42ca-bb9f-5d636cacd7cf": {
+            "fa8e69f8-1243-42ca-bb9f-5d636cacd7cf": {
                 "backgroundColor": "#6ee3b7",
                 "title": "Title for stage 2"
             }
         }
+    },
+    "questProgressAttributes": {
     }
 };
 
@@ -181,6 +232,12 @@ window.nativeStory = {
                     name: 'campaign2'
                 }
             ]);
+        }
+        if (objectName === 'questProgressFiles' && action === 'delete') {
+            console.log('questProgressFiles', 'delete', json);
+        }
+        if (objectName === 'questProgressFiles' && action === 'openFileDialog') {
+            _storyCallbacks.questProgressFiles.openFileDialogCallback({ success: true, fileName: 'file1.ext' });
         }
     }
 }

@@ -1,0 +1,106 @@
+<!-- context debug start -->
+<!-- <script src="../../../src/app-emulator.js"></script>
+<script src="../../../src/context.js"></script> -->
+<!-- context debug finish -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Files demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <div style="min-height: 70px;"></div>
+    <ul class="nav nav-tabs" id="tabs">
+        <li class="nav-item">
+            <a class="nav-link px-2 active" id="files-tab" href="#" active>Files</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-2" id="dialogs-tab" href="#">Dialogs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-2" id="screen-tab" href="#">Screen</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link px-2" id="codes-tab" href="#">Codes</a>
+        </li>
+    </ul>
+    <div class="container-fluid" style="overflow-y: scroll; max-height: 100vh;">
+
+        <div id="files-body" class="">
+        </div>
+        <div id="dialogs-body" class="hidden">
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-video-dialog" class="btn btn-secondary btn-sm btn-block">Open video dialog</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-photo-dialog" class="btn btn-secondary btn-sm btn-block">Open photo dialog</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-audio-dialog" class="btn btn-secondary btn-sm btn-block">Open audio dialog</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-file-dialog" class="btn btn-secondary btn-sm btn-block">Open file dialog</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-body" class="hidden">
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-record-start" class="btn btn-secondary btn-sm btn-block">Start screen record</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-record-stop" class="btn btn-secondary btn-sm btn-block">Stop screen record</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="codes-body" class="hidden">
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-code-bar" class="btn btn-secondary btn-sm btn-block">Open Bar dialog</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button id="btn-code-qr" class="btn btn-secondary btn-sm btn-block">Open QR dialog</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <pre id="result" style="font-size: 12px;"></pre>
+    </div>
+
+    <div>
+        <pre id="context" style="font-size: 12px;"></pre>
+    </div>
+
+    <svg id="svg-image" class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+    </svg>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

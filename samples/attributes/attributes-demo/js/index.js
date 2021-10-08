@@ -19,6 +19,10 @@ $("#btn-6").click(() => {
     story.setStory({ licenseAttributes: { testProp6: 6 } });
 });
 
+$("#btn-7").click(() => {
+    story.removeStoryProp('licenseAttributes.testProp6');
+});
+
 $("#btn-999").click(() => {
     story.licenseAttributes.testProp1 = undefined;
     story.licenseAttributes.testProp5 = undefined;

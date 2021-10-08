@@ -14,12 +14,34 @@
 При запуске контента для квеста объект window.story имеет следующую структуру:
 
 * **app** - readonly. Объект описывает девайс и приложение:
+  * `deviceId`
+  * `model`
+  * `name` - наименование приложения
+  * `os` - Android | iOS
+  * `osVersion`
+  * `timeZone` - number
+  * `version` - версия приложения
 * **content** - readonly. Объект описывает запущенную презентацию;
-* **licence** - readonly. Объект описывает пользователя приложения;
-* **questProgress** - readonly. Объект описывает квест и состояние прохождения;
-* **licenseAttributes**. Атрибуты пользователя;
-* **campaignAttributes**. Атрибуты кампании;
-* **questAttributes**. Атрибуты квеста.
-* **questProgressAttributes**. Атрибуты состояния прохождения квеста.
+  * `id`
+  * `name`
+  * `revision`
+  * `shortDescription`
+* **license** - readonly. Объект описывает пользователя приложения;
+  * `id`
+  * `name`
+  * `phone`
+  * `email`
+* **quest** - readonly. Объект описывает квест;
+  * `id` - идентификатор квеста
+  * `stages` - объект. Коллекция этапов квеста
+* **questProgress** - readonly. Объект описывает состояние прохождения квеста;
+  * `campaign` - объект. Кампания квеста
+  * `questEvents` - объект. Коллекция событий квеста
+  * `stage` - объект. Текущий этап квеста
+  * `status` - текущий статус квеста
+* **licenseAttributes** - атрибуты пользователя;
+* **campaignAttributes** - атрибуты кампании;
+* **questAttributes** - атрибуты квеста.
+* **questProgressAttributes** - атрибуты состояния прохождения квеста.
 
 Атрибуты – отдельный вид объектов, см. описание в [разделе атрибутов](../attributes/README.md).

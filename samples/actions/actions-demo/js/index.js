@@ -48,8 +48,18 @@ $("select[name='points']").change(function (e) {
 
 $(function () {
 
-    if (story.questProgress?.quest?.stages) {
-        $.each(story.questProgress.quest.stages, function (_, stage) {
+    const render = () => {
+        $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
+        let stageId = window.story.questProgress?.stage?.id?.split('.')[1];
+        let stageSettings = window.story.questAttributes?.stagesSettings[stageId];
+        if (stageSettings) {
+            $('body').css('background-color', stageSettings.backgroundColor);
+            $('#head-title').text(stageSettings.title);
+        }
+    }
+
+    if (story.quest?.stages) {
+        $.each(story.quest.stages, function (_, stage) {
             $('#stage').append($('<option>', {
                 value: stage.id,
                 text: stage.name
@@ -117,14 +127,10 @@ $(function () {
     });
 
     story.onStoryChange = function () {
-        $("#response").html("<pre>" + JSON.stringify(window._story, null, 4) + "</pre>");
-        let stageId = window.story.questProgress?.stage?.id;
-        let stageSettings = window.story.questProgressAttributes?.stagesSettings[stageId];
-        if (stageSettings) {
-            $('body').css('background-color', stageSettings.backgroundColor);
-            $('#head-title').text(stageSettings.title);
-        }
+        render();
     }
+    render();
+    $("body").removeClass('hidden');
 });
 
 var disableButtons = function (disabled) {
