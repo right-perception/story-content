@@ -1,4 +1,4 @@
-// rev:53
+// rev:54
 
 ; (function () {
     if (window._story === undefined) {
@@ -197,7 +197,7 @@
     const proxifyStory = function (newStory) {
         let newState = {};
         for (let newStoryProp in newStory) {
-            if (!newStoryProp in newStory.scheme || newStoryProp === 'scheme') {
+            if (!(newStoryProp in newStory.scheme) || newStoryProp === 'scheme') {
                 continue;
             }
 
