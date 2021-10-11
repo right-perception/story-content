@@ -53,6 +53,14 @@ window._storyTemplate = {
                     "hasModel": true
                 },
                 {
+                    "name": "setMetadata",
+                    "hasModel": true
+                },
+                {
+                    "name": "removeMetadata",
+                    "hasModel": true
+                },
+                {
                     "name": "openVideoDialog",
                     "hasModel": true
                 },
@@ -139,15 +147,39 @@ window._storyTemplate = {
                 "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/actions-demo.zip?sv=2020-08-04&st=2021-10-06T07%3A11%3A06Z&se=2022-10-07T07%3A11%3A06Z&sr=b&sp=r&sig=r8QxkHHmH0et3sfkXfGpoHoM%2FkowNJBxEyNXUmPYjxE%3D",
                 "size": 55442,
                 "metadata": {
-                    "hash": "1234"
+                    "hash": "1234",
+                    "content_type": "application/zip",
+                    "some_meta": "23123123"
                 }
             },
             "1": {
-                "name": "some-image.png",
-                "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/actions-demo.zip?sv=2020-08-04&st=2021-10-06T07%3A11%3A06Z&se=2022-10-07T07%3A11%3A06Z&sr=b&sp=r&sig=r8QxkHHmH0et3sfkXfGpoHoM%2FkowNJBxEyNXUmPYjxE%3D",
+                "name": "korabli-more-noch-pejzazh-transport-27131.jpeg",
+                "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/korabli-more-noch-pejzazh-transport-27131.jpeg?sp=r&st=2021-10-11T06:14:57Z&se=2021-10-11T14:14:57Z&spr=https&sv=2020-08-04&sr=b&sig=gMZlaHKCSUPxmRMpgnLcBqE8oHGRN3KUs2BIDPYA7GM%3D",
                 "size": 334455,
                 "metadata": {
-                    "hash": "gfdhgdhgd"
+                    "hash": "gfdhgdhgd",
+                    "content_type": "image/jpeg",
+                    "some_meta": "yrfgjytj"
+                }
+            },
+            "2": {
+                "name": "Дефицит, построенный на обмане. Противоречивые новые GPU Nvidia. RX 6600. И почему мы ждем Apple M1X.mp4",
+                "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/%D0%94%D0%B5%D1%84%D0%B8%D1%86%D0%B8%D1%82%2C%20%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BD%D0%B0%20%D0%BE%D0%B1%D0%BC%D0%B0%D0%BD%D0%B5.%20%D0%9F%D1%80%D0%BE%D1%82%D0%B8%D0%B2%D0%BE%D1%80%D0%B5%D1%87%D0%B8%D0%B2%D1%8B%D0%B5%20%D0%BD%D0%BE%D0%B2%D1%8B%D0%B5%20GPU%20Nvidia.%20RX%206600.%20%D0%98%20%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83%20%D0%BC%D1%8B%20%D0%B6%D0%B4%D0%B5%D0%BC%20Apple%20M1X.mp4?sp=r&st=2021-10-11T06:33:54Z&se=2021-10-11T14:33:54Z&spr=https&sv=2020-08-04&sr=b&sig=JYuognTYVtxfnU65dpL%2BYWu7lmuun%2BnSDEnJiwbSATk%3D",
+                "size": 25431113728,
+                "metadata": {
+                    "hash": "gfdhgdfhgfdghjfghkjjghkgdhgdvghjghjgjghjghjghjghjghjghjghjgjghjghj",
+                    "content_type": "video/mp4",
+                    "some_meta": "y634u5uklll;"
+                }
+            },
+            "3": {
+                "name": "Different Kind of Blues - IAMJJ.m4a",
+                "uri": "https://storageaccountknauf9103.blob.core.windows.net/a3683112-24061960-4e41-47d0-b466-246dda10e467/Different%20Kind%20of%20Blues%20-%20IAMJJ.m4a?sp=r&st=2021-10-11T06:45:37Z&se=2021-10-11T14:45:37Z&spr=https&sv=2020-08-04&sr=b&sig=fMt1shxu1UCIXk7WX%2B37HSIVS5kt7ZHa%2FKog239y8IY%3D",
+                "size": 3638558,
+                "metadata": {
+                    "hash": "weou248ysdfkjhcx",
+                    "content_type": "audio/x-m4a",
+                    "some_meta": "hg5467ihgjf"
                 }
             }
         }
@@ -215,8 +247,9 @@ window.nativeStory = {
         _onStoryChange();
     },
     runAction: function (objectName, action, json) {
+        let model = JSON.parse(json);
+
         if (objectName === 'content' && action === 'getClient') {
-            let model = JSON.parse(json);
             window._storyCallbacks.content.getClientCallback({ id: model, name: 'client name1' });
         } if (objectName === 'questProgress' && action === 'transferPoints') {
             window._storyCallbacks.questProgress.transferPointsCallback({});
@@ -233,9 +266,40 @@ window.nativeStory = {
                 }
             ]);
         }
+
         if (objectName === 'questProgressFiles' && action === 'delete') {
-            console.log('questProgressFiles', 'delete', json);
+            for (let key in _storyTemplate.questProgressFiles.items) {
+                let item = _storyTemplate.questProgressFiles.items[key];
+                if (item.name !== model) {
+                    continue;
+                }
+
+                delete _storyTemplate.questProgressFiles.items[key];
+                _storyCallbacks.questProgressFiles.deleteCallback({ success: true, fileName: model });
+                _onStoryChange();
+                return;
+            }
         }
+
+        if (objectName === 'questProgressFiles' && action === 'setMetadata') {
+            let item = Object.values(_storyTemplate.questProgressFiles.items).find(x => x.name === model.name);
+            for (let key in model.metadata) {
+                item.metadata[key] = model.metadata[key];
+            }
+
+            _storyCallbacks.questProgressFiles.setMetadataCallback({ success: true, fileName: model.name });
+            _onStoryChange();
+        }
+
+        if (objectName === 'questProgressFiles' && action === 'removeMetadata') {
+            let item = Object.values(_storyTemplate.questProgressFiles.items).find(x => x.name === model.name);
+            for (let key of model.keys) {
+                delete item.metadata[key];
+            }
+            _storyCallbacks.questProgressFiles.removeMetadataCallback({ success: true, fileName: model.name });
+            _onStoryChange();
+        }
+
         if (objectName === 'questProgressFiles' && action === 'openFileDialog') {
             _storyCallbacks.questProgressFiles.openFileDialogCallback({ success: true, fileName: 'file1.ext' });
         }
